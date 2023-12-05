@@ -1,12 +1,39 @@
 apiVersion: tutorial.my.domain/v1
 kind: Foo
 metadata:
+  name: foo-01
   labels:
     app.kubernetes.io/name: foo
     app.kubernetes.io/instance: foo-sample
-    app.kubernetes.io/part-of: k8s-operator-tutorial
+    app.kubernetes.io/part-of: operator-v1
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: k8s-operator-tutorial
-  name: foo-sample
+    app.kubernetes.io/created-by: operator-v1
 spec:
-  # TODO(user): Add fields here
+  name: jack
+
+---
+apiVersion: tutorial.my.domain/v1
+kind: Foo
+metadata:
+  name: foo-02
+  labels:
+    app.kubernetes.io/name: foo
+    app.kubernetes.io/instance: foo-sample
+    app.kubernetes.io/part-of: operator-v1
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: operator-v1
+spec:
+  name: joe
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jack
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:latest
+    # Just sleep forever
+    command: [ "sleep" ]
+    args: [ "infinity" ]
